@@ -15,7 +15,7 @@ const InputForm = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     showFakeApiCallLoading();
-    setError(''); // Reset any previous error messages
+    setError('');
     const lines = latLngs.split('\n');
     const path: PathPoint[] = [];
 
@@ -74,7 +74,7 @@ const InputForm = ({
       {error && <p className='text-red-600 w-[300px] p-4'>{error}</p>}{' '}
       <button
         type='submit'
-        className='bg-[#33bf99] my-2 px-4 py-2 w-fit text-base font-light rounded-md text-gray-200'
+        className='bg-[#33bf99] my-2 px-4 py-2 w-fit text-base font-light rounded-md text-white'
       >
         Simulate
       </button>

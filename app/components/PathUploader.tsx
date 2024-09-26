@@ -1,7 +1,8 @@
+// PathUploader.tsx
 import React from 'react';
-import FileUpload from './FileUpload';
-import { PathPoint } from '../types/types';
 import InputForm from './InputForm';
+import FileUpload from './FileUpload';
+import { PathPoint } from 'app/types/types';
 
 const PathUploader = ({
   onPathChange,
@@ -10,7 +11,6 @@ const PathUploader = ({
   showFakeApiCallLoading,
 }: {
   onPathChange: (path: PathPoint[]) => void;
-  currentPath: PathPoint[];
   uploadedFiles: File[];
   setUploadedFiles: (files: File[]) => void;
   showFakeApiCallLoading: () => void;
@@ -22,6 +22,7 @@ const PathUploader = ({
         onSubmit={onPathChange}
       />
       <FileUpload
+        showFakeApiCallLoading={showFakeApiCallLoading}
         onUpload={onPathChange}
         uploadedFiles={uploadedFiles}
         setUploadedFiles={setUploadedFiles}

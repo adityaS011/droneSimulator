@@ -1,12 +1,23 @@
 'use client';
 import React, { useState } from 'react';
 
-const FileUpload: React.FC<{
+const FileUpload = ({
+  onUpload,
+  uploadedFiles,
+  setUploadedFiles,
+  showFakeApiCallLoading,
+}: {
   onUpload: (newPath: { lat: number; lng: number; time: number }[]) => void;
   uploadedFiles: File[];
   setUploadedFiles: (val: File[]) => void;
-}> = ({ onUpload, uploadedFiles, setUploadedFiles }) => {
+  showFakeApiCallLoading: () => void;
+}) => {
   const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [parsedPath, setParsedPath] = useState<
+    { lat: number; lng: number; time: number }[]
+  >([]); // Store parsed path
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -61,9 +72,8 @@ const FileUpload: React.FC<{
 
           path.push({ lat: latitude, lng: longitude, time: duration });
         }
-
+        setParsedPath(path); // Store parsed path in state
         setError(''); // Clear any previous error
-        onUpload(path); // Pass the parsed path to onUpload
       };
 
       reader.readAsText(file);
@@ -71,19 +81,47 @@ const FileUpload: React.FC<{
 
     files.forEach(readFile); // Read each file
   };
+  const handleSimulate = async () => {
+    showFakeApiCallLoading();
 
+    setIsLoading(true);
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+    setIsLoading(false);
+
+    if (parsedPath.length > 0) {
+      onUpload(parsedPath);
+    } else {
+      setError('No valid path to simulate.'); // Handle case where no valid path was parsed
+    }
+  };
   return (
-    <div className='flex flex-col font-sans items-center bg-[#4A8BDF] rounded-lg p-2 gap-3 w-fit'>
-      <p className='text-slate-800  font-semibold'>Upload CSV files</p>
+    <div className='flex flex-col font-sans items-center bg-[#4f3194] rounded-lg p-2 gap-3 w-fit'>
+      <p className='text-slate-200  font-semibold'>Upload CSV files</p>
       <div className='px-2'>
         <input type='file' accept='.csv' multiple onChange={handleFileChange} />
+        {error && (
+          <p className='text-red-600 w-fit m-1 p-2 bg-slate-200 rounded-xl text-sm text-center  border-red-800 border'>
+            {error}
+          </p>
+        )}
       </div>
-      {error && <p className='text-red-500 w-[300px] p-4'>{error}</p>}
-      <div className='mt-4'>
-        <h4 className='text-slate-800'>Uploaded Files:</h4>
+      <div className=' flex flex-col w-full px-4'>
+        <div className='flex flex-row justify-between items-center w-full '>
+          <h4 className='text-slate-200'>Uploaded Files:</h4>
+          <button
+            onClick={handleSimulate}
+            className='bg-[#30bc97]  px-4 py-2 w-fit text-base  rounded-md text-white font-normal'
+          >
+            {isLoading ? <p>Loading...</p> : <p> Simulate</p>}
+          </button>
+        </div>
         <ul className='text-slate-800'>
           {uploadedFiles.map((file, index) => (
-            <li key={index}>{file.name}</li>
+            <li key={index} className='text-slate-300'>
+              {file.name}
+            </li>
           ))}
         </ul>
       </div>

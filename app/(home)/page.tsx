@@ -32,7 +32,6 @@ const Home = () => {
   };
 
   const startSimulation = () => {
-    console.log(path);
     if (path.length > 0) {
       setSimulationStarted(true);
     }
@@ -43,9 +42,9 @@ const Home = () => {
   };
 
   const resetSimulation = () => {
-    setPath([initialPath]); // Reset path to initial state
-    setSimulationStarted(false); // End simulation
-    setIsPaused(false); // Ensure the simulation is not paused
+    setPath([initialPath]);
+    setSimulationStarted(false);
+    setIsPaused(false);
   };
 
   const isPathUnchanged =
@@ -54,21 +53,24 @@ const Home = () => {
     path[0].lng === initialPath.lng;
 
   return (
-    <div className='w-full h-screen flex flex-row'>
-      <div className='w-[400px] flex flex-col gap-6 h-full items-center p-4 border-r border-gray-200 bg-gradient-to-t from-[#e8e8e8] to-green-50 pt-10'>
+    <div className='w-full h-screen flex flex-row '>
+      {/*Sidebar*/}
+      <div className='w-[400px] flex flex-col gap-6 h-full items-center p-4 border-r border-gray-400 bg-gradient-to-t from-slate-600 to-slate-400 pt-10'>
         <div className='text-xl font-semibold text-gray-800 uppercase flex flex-col items-center'>
           <Image
             src={'/drone_logo.png'}
             alt={'logo'}
             width={200}
             height={100}
+            className='text-white'
           />
-          <div>Drone Motion Simulator</div>
+          <div className='text-gray-200 shadow-lg p-2'>
+            Drone Motion Simulator
+          </div>
         </div>
 
         <PathUploader
           onPathChange={handleUpload}
-          currentPath={path}
           uploadedFiles={uploadedFiles}
           setUploadedFiles={setUploadedFiles}
           showFakeApiCallLoading={showFakeApiCallLoading}
@@ -76,14 +78,11 @@ const Home = () => {
 
         <SimulationControls
           isPaused={isPaused}
-          simulationStarted={simulationStarted}
-          isPathUnchanged={isPathUnchanged}
-          onStartSimulation={startSimulation}
           onPauseResume={() => setIsPaused(!isPaused)}
           onReset={resetSimulation}
         />
       </div>
-
+      {/*Main Component*/}
       {isLoading ? (
         <BouncingLoader />
       ) : (

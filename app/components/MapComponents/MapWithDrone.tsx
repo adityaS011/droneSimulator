@@ -30,9 +30,9 @@ const MapWithDrone = ({
         const { lat, lng, time } = path[index];
         setCurrentPosition({ lat, lng });
         setProgressPath((prev) => [...prev, { lat, lng }]);
-        map.setView([lat, lng], 16); // Center map on the current position
+        map.setView([lat, lng], 16);
         index++;
-        intervalRef.current = setTimeout(updatePosition, time);
+        intervalRef.current = setTimeout(updatePosition, time); // Adjust the interval for smoother animations
       } else {
         clearTimeout(intervalRef.current!);
       }
@@ -49,15 +49,21 @@ const MapWithDrone = ({
 
   return (
     <>
-      {/* Light black line showing the entire path */}
+      {/* Dashed line showing the entire path */}
       <Polyline
         positions={path.map(({ lat, lng }) => [lat, lng])}
         color='black'
         opacity={0.3}
+        dashArray='5, 5'
       />
 
       {/* Path drone has traversed */}
-      <Polyline positions={progressPath} color='blue' />
+      <Polyline
+        positions={progressPath}
+        color='blue'
+        weight={3}
+        smoothFactor={10}
+      />
 
       <MapMarkers
         currentPosition={currentPosition}

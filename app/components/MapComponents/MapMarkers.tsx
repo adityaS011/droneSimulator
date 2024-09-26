@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Marker } from 'react-leaflet';
-import L, { LeafletEvent } from 'leaflet';
+import { LeafletEvent } from 'leaflet';
 import { LatLng, PathPoint } from '../../types/types';
+import { droneIcon, locationIcon } from 'app/icons';
 
 const MapMarkers = ({
   currentPosition,
@@ -18,18 +19,6 @@ const MapMarkers = ({
 }) => {
   const [hasBeenDragged, setHasBeenDragged] = useState(false); // Track if the drone has been dragged
 
-  const droneIcon = new L.Icon({
-    iconUrl: '/drone_icon.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-  });
-  const locationIcon = new L.Icon({
-    iconUrl: '/past_locationIcon.png',
-    iconSize: [28, 32],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-  });
   const handleDragEnd = (event: LeafletEvent) => {
     const marker = event.target;
     const newPosition: LatLng = marker.getLatLng();
@@ -50,8 +39,10 @@ const MapMarkers = ({
         />
       )}
 
-      {currentPosition && path.length > 0 && hasBeenDragged && (
-        <Marker position={path[0]} icon={locationIcon} />
+      {currentPosition && (path.length > 1 || hasBeenDragged) && (
+        <Marker position={path[0]} icon={locationIcon}
+        
+        />
       )}
     </>
   );
