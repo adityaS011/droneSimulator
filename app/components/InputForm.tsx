@@ -69,7 +69,7 @@ const InputForm = ({
         className='bg-slate-200 text-gray-800 p-4 w-[300px] h-32 focus:outline-slate-200 flex flex-row rounded-lg placeholder:text-gray-400'
         value={latLngs}
         onChange={(e) => setLatLngs(e.target.value)}
-        placeholder='Enter lat lng time pairs separated by new lines'
+        placeholder='Enter lat lng time pairs separated by new lines. For example: 26.8467,80.9462,2000'
       />
       {error && <p className='text-red-600 w-[300px] p-4'>{error}</p>}{' '}
       <button
