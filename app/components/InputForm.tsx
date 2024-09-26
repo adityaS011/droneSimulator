@@ -24,7 +24,7 @@ const InputForm = ({
 
       if (parts.length !== 3) {
         setError(
-          'Each line must contain exactly three values: latitude, longitude, and time (in seconds).'
+          'Each line must contain exactly three values: latitude, longitude, and time (in seconds). Example: 26.8467,80.9462,2000'
         );
         return;
       }
