@@ -17,7 +17,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const initialPath: PathPoint = { lat: 28.6279, lng: 77.216, time: 2000 };
   const [path, setPath] = useState<PathPoint[]>([initialPath]);
-  const [simulationStarted, setSimulationStarted] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   useEffect(() => {
@@ -31,26 +30,14 @@ const Home = () => {
     }, 2000);
   };
 
-  const startSimulation = () => {
-    if (path.length > 0) {
-      setSimulationStarted(true);
-    }
-  };
-
   const handleUpload = (newPath: PathPoint[]) => {
     setPath((prevPath) => [...prevPath, ...newPath]);
   };
 
   const resetSimulation = () => {
     setPath([initialPath]);
-    setSimulationStarted(false);
     setIsPaused(false);
   };
-
-  const isPathUnchanged =
-    path.length === 1 &&
-    path[0].lat === initialPath.lat &&
-    path[0].lng === initialPath.lng;
 
   return (
     <div className='w-full h-screen flex flex-row '>
