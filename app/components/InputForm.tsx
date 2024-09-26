@@ -71,7 +71,11 @@ const InputForm = ({
         onChange={(e) => setLatLngs(e.target.value)}
         placeholder='Enter lat lng time pairs separated by new lines. For example: 26.8467,80.9462,2000'
       />
-      {error && <p className='text-red-600 w-[300px] p-4'>{error}</p>}{' '}
+      {error && (
+        <p className='text-red-500 w-[300px] text-xs bg-slate-300 font-medium p-2 rounded-lg border border-red-700'>
+          {error}
+        </p>
+      )}{' '}
       <button
         type='submit'
         className='bg-[#33bf99] my-2 px-4 py-2 w-fit text-base font-light rounded-md text-white'

@@ -102,10 +102,10 @@ const FileUpload = ({
       <div className='px-2'>
         <input type='file' accept='.csv' multiple onChange={handleFileChange} />
         {error && (
-          <p className='text-red-600 w-fit m-1 p-2 bg-slate-200 rounded-xl text-sm text-center  border-red-800 border'>
+          <p className='text-red-500 w-[300px] mt-2 font-medium text-xs bg-slate-300 p-2 rounded-lg border border-red-700'>
             {error}
           </p>
-        )}
+        )}{' '}
       </div>
       <div className=' flex flex-col w-full px-4'>
         <div className='flex flex-row justify-between items-center w-full '>
