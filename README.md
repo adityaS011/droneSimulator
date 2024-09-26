@@ -23,22 +23,32 @@ The **Drone Motion Simulator** is an interactive web application designed to vis
 
 ```plaintext
 drone-motion-simulator/
+├── (home)/
+│   ├── pages.tsx
 ├── components/
 │   ├── Loaders/
+│   │   └── BouncingLoader.tsx
 │   ├── MapComponents/
+│   │   └── MapControllers.tsx
+│   │   └── MapMarkers.tsx
+│   │   └── MapWithDrone.tsx
+│   ├── FileUpload.tsx
+│   ├── InputForm.tsx
 │   ├── PathUploader.tsx
 │   └── SimulationControls.tsx
-├── pages/
-│   ├── api/
-│   ├── _app.tsx
-│   └── index.tsx
 ├── public/
 │   └── drone_logo.png
+│   └── drone_icon.png
+│   └── favicon.png
+│   └── past_locationIcon.png
+│   └── deploy_sample.png
 ├── styles/
 │   └── globals.css
 ├── types/
 │   └── types.ts
 ├── package.json
+├── layout.tsx
+├── icons.tsx
 ├── tsconfig.json
 └── README.md
 ```
