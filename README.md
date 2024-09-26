@@ -1,6 +1,6 @@
 # Drone Motion Simulator
 
-![Drone Motion Simulator Logo](./deploy_sample.png)
+![Drone Motion Simulator Logo]([./deploy_sample.png](https://github.com/adityaS011/droneSimulator/blob/main/public/deploy_sample.png))
 
 ## Overview
 
